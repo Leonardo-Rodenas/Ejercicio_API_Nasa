@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Ejercicio_API_Nasa</string>
+
+    <string name="compraRenta"> Compra/Renta</string>
+    <string name="valor">$ Precio</string>
+
+</resources>
