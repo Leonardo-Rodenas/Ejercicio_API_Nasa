@@ -14,12 +14,19 @@ class TerrenosViewModel(application: Application) : AndroidViewModel(application
     private var repositorio : TerrenosRepositorio
 
     init {
-        //indica funcion que traera el repositorio
+
         val terrenosDao = TerrenosDataBase.crearDatabase(application).obtenTerrenosDelDao()
         repositorio = TerrenosRepositorio(terrenosDao)
+
     }
 
-    fun exponeDatosDelServer():LiveData<List<TerrenosModelItem>> {
-        return repositorio.miLiveData
+    fun traemeLoDelServer() {
+
+      repositorio.obtenDataDelServer()
+
+    }
+
+    fun exponeDatosDeDB():LiveData<List<TerrenosModelItem>> {
+        return repositorio.exponeDatosDelBaseDeDatos()
     }
 }

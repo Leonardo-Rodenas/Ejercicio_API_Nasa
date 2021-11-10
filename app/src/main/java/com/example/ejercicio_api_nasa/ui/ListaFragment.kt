@@ -1,6 +1,5 @@
 package com.example.ejercicio_api_nasa.ui
 
-import android.R
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ejercicio_api_nasa.R
 import com.example.ejercicio_api_nasa.adapter.AdaptadorRV
 import com.example.ejercicio_api_nasa.databinding.FragmentListaBinding
+import com.example.ejercicio_api_nasa.model.TerrenosModelItem
 import com.example.ejercicio_api_nasa.viewmodel.Factory
 import com.example.ejercicio_api_nasa.viewmodel.TerrenosViewModel
 
@@ -41,10 +44,24 @@ class ListaFragment : Fragment() {
             rvImgTerrenos.adapter = adapter
 
             Log.v("imgagenesRV", "Imagenes estan?")
-            vmodel.exponeDatosDelServer()
+            vmodel.traemeLoDelServer()
+
+            adapter.setearListener(object : AdaptadorRV.alClickearItemRV{
+                override fun itemClick(position: Int) {
+                        //hey listen!!! poner acá lo que quiero que haga al clickear
+
+                    var miBundle = Bundle()
+
+
+                    findNavController().navigate(R.id.action_listaFragment_to_detalleFragment, /*meter budle*/)
+
+
+                }
+            })
+
         }
 
-        vmodel.exponeDatosDelServer().observe(viewLifecycleOwner, Observer {
+        vmodel.exponeDatosDeDB().observe(viewLifecycleOwner, Observer {
 
             Log.d("RecyclerViewImagenes", it.toString())
             adapter.setTerrenos(it)

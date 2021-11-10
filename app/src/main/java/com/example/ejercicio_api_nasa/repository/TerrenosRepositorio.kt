@@ -1,5 +1,7 @@
 package com.example.ejercicio_api_nasa.repository
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.ejercicio_api_nasa.client.ClienteDeRetrofit
 import com.example.ejercicio_api_nasa.dao.TerrenosDao
 import com.example.ejercicio_api_nasa.model.TerrenosModelItem
@@ -25,6 +27,7 @@ class TerrenosRepositorio(private val terrenosDao: TerrenosDao) {
             ) {
                 CoroutineScope(Dispatchers.IO).launch {
                     response.body()?.let {
+                        Log.v("logenrepo", response.body().toString())
                         terrenosDao.insertarTodosLosTerrenos(it)
                     }
                 }
@@ -35,5 +38,9 @@ class TerrenosRepositorio(private val terrenosDao: TerrenosDao) {
             }
 
         })
+    }
+
+    fun exponeDatosDelBaseDeDatos(): LiveData<List<TerrenosModelItem>> {
+        return terrenosDao.obtenerTodosLosTerrenosDeLaBD()
     }
 }

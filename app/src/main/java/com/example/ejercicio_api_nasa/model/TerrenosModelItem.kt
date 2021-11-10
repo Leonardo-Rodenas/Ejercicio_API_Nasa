@@ -11,10 +11,9 @@ data class TerrenosModelItem(
     @PrimaryKey(autoGenerate = false)
     val id: String,
 
-    @SerializedName("imagen")
     val img_src: String,
 
-    val price: Int, //Long en el ejemplo?
+    val price: Int,
 
     val type: String
 

@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface TerrenosService {
 
-    @GET("realstate")
+    @GET("realestate/")
     fun obtenerTerrenos(): Call<List<TerrenosModelItem>>
 
 

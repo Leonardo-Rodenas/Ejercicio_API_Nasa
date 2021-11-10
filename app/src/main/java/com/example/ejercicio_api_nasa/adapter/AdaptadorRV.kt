@@ -1,7 +1,6 @@
 package com.example.ejercicio_api_nasa.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ejercicio_api_nasa.R
@@ -9,22 +8,16 @@ import com.example.ejercicio_api_nasa.databinding.ItemRecyclerviewBinding
 import com.example.ejercicio_api_nasa.model.TerrenosModelItem
 import com.squareup.picasso.Picasso
 
-class AdaptadorRV : RecyclerView.Adapter<AdaptadorRV.CustomViewHolder>() {
+class AdaptadorRV() : RecyclerView.Adapter<AdaptadorRV.CustomViewHolder>() {
 
     private var lista: List<TerrenosModelItem> = ArrayList()
     private lateinit var miListener: alClickearItemRV
 
-    class CustomViewHolder(val binding: ItemRecyclerviewBinding, listener: alClickearItemRV) :
+    class CustomViewHolder(
+        private val binding: ItemRecyclerviewBinding,
+        private val listener: alClickearItemRV
+    ) :
         RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            binding.itemCard.setOnClickListener {
-
-                listener.itemClick(adapterPosition)
-
-            }
-        }
-
 
         fun bindData(img: TerrenosModelItem) {
             //Picasso.get().load(img.img_src).into(binding.ivTerreno)
@@ -32,7 +25,13 @@ class AdaptadorRV : RecyclerView.Adapter<AdaptadorRV.CustomViewHolder>() {
             Picasso.get().load(img.img_src).fit().centerCrop()
                 .placeholder(R.drawable.user_placeholder)
                 .error(R.drawable.user_placeholder_error)
-                .into(binding.ivTerreno);
+                .into(binding.ivTerreno)
+            binding.itemCard.setOnClickListener {
+
+                listener.itemClick(adapterPosition)
+
+            }
+
         }
 
     }
@@ -66,9 +65,9 @@ class AdaptadorRV : RecyclerView.Adapter<AdaptadorRV.CustomViewHolder>() {
 
     }
 
-    /*fun setearListener(listener: alClickearItemRV) {
+    fun setearListener(listener: alClickearItemRV) {
 
         miListener = listener
-    }*/
+    }
 
 }
