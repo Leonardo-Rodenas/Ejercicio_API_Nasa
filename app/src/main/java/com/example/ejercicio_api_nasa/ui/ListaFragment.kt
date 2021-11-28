@@ -23,8 +23,6 @@ class ListaFragment : Fragment() {
 
     private var _binding: FragmentListaBinding? = null
     private val binding get() = _binding!!
-
-    //val vmodel: TerrenosViewModel by activityViewModels()
     lateinit var vmodel: TerrenosViewModel
 
     override fun onCreateView(
@@ -46,25 +44,38 @@ class ListaFragment : Fragment() {
             Log.v("imgagenesRV", "Imagenes estan?")
             vmodel.traemeLoDelServer()
 
-            adapter.setearListener(object : AdaptadorRV.alClickearItemRV{
-                override fun itemClick(position: Int) {
-                        //hey listen!!! poner acá lo que quiero que haga al clickear
+            adapter.setearListener(object : AdaptadorRV.alClickearItemRV {
+                override fun itemClick(terreno: TerrenosModelItem) {
+                    //hey listen!!! poner acá lo que quiero que haga al clickear
 
                     var miBundle = Bundle()
+                    miBundle.putSerializable("terreno", terreno)
 
 
-                    findNavController().navigate(R.id.action_listaFragment_to_detalleFragment, /*meter budle*/)
+                    findNavController().navigate(R.id.action_listaFragment_to_detalleFragment, miBundle /*meter budle*/)
 
 
                 }
             })
-
         }
 
         vmodel.exponeDatosDeDB().observe(viewLifecycleOwner, Observer {
 
             Log.d("RecyclerViewImagenes", it.toString())
             adapter.setTerrenos(it)
+          /*  adapter.setearListener(object : AdaptadorRV.alClickearItemRV {
+                override fun itemClick(position: Int) {
+                    //hey listen!!! poner acá lo que quiero que haga al clickear
+
+                    var miBundle = Bundle()
+                    miBundle.putSerializable("terreno", it)
+
+
+                    findNavController().navigate(R.id.action_listaFragment_to_detalleFragment *//*meter budle*//*)
+
+
+                }
+            })*/
 
         })
 

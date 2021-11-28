@@ -28,7 +28,7 @@ class AdaptadorRV() : RecyclerView.Adapter<AdaptadorRV.CustomViewHolder>() {
                 .into(binding.ivTerreno)
             binding.itemCard.setOnClickListener {
 
-                listener.itemClick(adapterPosition)
+                listener.itemClick(img)
 
             }
 
@@ -54,14 +54,14 @@ class AdaptadorRV() : RecyclerView.Adapter<AdaptadorRV.CustomViewHolder>() {
         return lista.size
     }
 
-    fun setTerrenos(frases: List<TerrenosModelItem>) {
-        lista = frases as ArrayList<TerrenosModelItem>
+    fun setTerrenos(terreno: List<TerrenosModelItem>) {
+        lista = terreno as ArrayList<TerrenosModelItem>
         notifyDataSetChanged()
     }
 
     interface alClickearItemRV {
 
-        fun itemClick(position: Int)
+        fun itemClick(terreno: TerrenosModelItem)
 
     }
 
